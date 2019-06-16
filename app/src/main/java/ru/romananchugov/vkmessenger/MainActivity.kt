@@ -1,7 +1,7 @@
 package ru.romananchugov.vkmessenger
 
 import android.os.Bundle
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.romananchugov.vkmessenger.base_classes.BaseActivity
 import ru.romananchugov.vkmessenger.chats_list.ChatsListViewModel
 
