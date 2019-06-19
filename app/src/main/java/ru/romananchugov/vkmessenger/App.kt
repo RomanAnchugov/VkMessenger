@@ -4,7 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import ru.romananchugov.vkmessenger.modules.viewModelsModule
+import ru.romananchugov.vkmessenger.di.viewModelsModule
 import timber.log.Timber
 
 class App: Application(){

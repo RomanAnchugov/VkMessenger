@@ -1,4 +1,4 @@
-package ru.romananchugov.vkmessenger.modules
+package ru.romananchugov.vkmessenger.di
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
