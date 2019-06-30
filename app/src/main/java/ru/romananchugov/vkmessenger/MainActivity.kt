@@ -16,6 +16,7 @@ class MainActivity : BaseActivity(), AuthenticationListener {
     companion object {
         private const val TAG = "MainActivity"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,19 +27,20 @@ class MainActivity : BaseActivity(), AuthenticationListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val callback = object: VKAuthCallback {
+
+        val callback = object : VKAuthCallback {
             override fun onLogin(token: VKAccessToken) {
                 // User passed authorization
-                supportFragmentManager.fragments.forEach {
-                    if(it is AuthenticationFragment){
+                supportFragmentManager.fragments[0].childFragmentManager.fragments.forEach {
+                    if (it is AuthenticationFragment) {
                         it.authSuccessFromActivity(token)
                     }
                 }
             }
 
             override fun onLoginFailed(errorCode: Int) {
-                supportFragmentManager.fragments.forEach {
-                    if(it is AuthenticationFragment){
+                supportFragmentManager.fragments[0].childFragmentManager.fragments.forEach {
+                    if (it is AuthenticationFragment) {
                         it.authFailedFromActivity(errorCode)
                     }
                 }

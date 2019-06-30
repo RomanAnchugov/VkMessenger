@@ -11,6 +11,7 @@ import ru.romananchugov.vkmessenger.R
 import ru.romananchugov.vkmessenger.base_classes.BaseFragment
 import ru.romananchugov.vkmessenger.chats_list.AuthState
 import ru.romananchugov.vkmessenger.utils.possibleListeners
+import timber.log.Timber
 
 
 class AuthenticationFragment : BaseFragment() {
@@ -26,8 +27,8 @@ class AuthenticationFragment : BaseFragment() {
         authViewModel.authState.observe(this, Observer {
             when (it) {
                 is AuthState.StartLogin -> startAuth()
-                is AuthState.Success -> TODO("not implemented")
-                is AuthState.Error -> TODO("not implemented")
+                is AuthState.Success -> Timber.i("Succes state")
+                is AuthState.Error -> Timber.i("Error state")
             }
         })
         authViewModel.onViewCreated()
