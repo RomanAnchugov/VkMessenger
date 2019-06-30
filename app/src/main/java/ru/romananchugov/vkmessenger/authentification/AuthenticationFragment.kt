@@ -25,12 +25,9 @@ class AuthenticationFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         authViewModel.authState.observe(this, Observer {
-            when (it) {
-                is AuthState.StartLogin -> startAuth()
-                is AuthState.Success -> Timber.i("Succes state")
-                is AuthState.Error -> Timber.i("Error state")
-            }
+            handleState(it)
         })
+
         authViewModel.onViewCreated()
     }
 
@@ -38,6 +35,12 @@ class AuthenticationFragment : BaseFragment() {
         possibleListeners<AuthenticationListener>().forEach {
             it.startAuth()
         }
+    }
+
+    private fun handleState(authState: AuthState) = when (authState) {
+        is AuthState.ProcessAuth -> startAuth()
+        is AuthState.Success -> Timber.i("Succes state")
+        is AuthState.Error -> Timber.i("Error state")
     }
 
     fun authSuccessFromActivity(token: VKAccessToken) {

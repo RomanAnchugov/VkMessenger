@@ -30,21 +30,15 @@ class AuthenticationViewModel : BaseViewModel() {
     fun authPassed(token: VKAccessToken) {
         Timber.i("Authntication successfuly passed; toke $token")
         _authState.value = AuthState.Success(token)
-        //cancelLogin()
     }
 
     fun authFailed(errorCode: Int) {
         Timber.i("Authntication failed; error code $errorCode")
         _authState.value = AuthState.Error(errorCode)
-        //cancelLogin()
     }
 
     private fun performLogin() {
         Timber.i("Started loggining")
-        _authState.value = AuthState.StartLogin
+        _authState.value = AuthState.ProcessAuth
     }
-
-//    private fun cancelLogin() {
-//        _loginAction.value = null
-//    }
 }
