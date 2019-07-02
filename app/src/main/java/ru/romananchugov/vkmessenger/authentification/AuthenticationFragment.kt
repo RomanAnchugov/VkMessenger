@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -63,6 +64,7 @@ class AuthenticationFragment : BaseFragment() {
         view?.let {
             Snackbar
                 .make(it, getString(R.string.sth_went_wrong), Snackbar.LENGTH_INDEFINITE)
+                .setActionTextColor(ContextCompat.getColor(requireContext() ,R.color.errorSnackColor))
                 .setAction(getString(R.string.retry)) {
                     authViewModel.onErrorSnackClicked()
                 }.show()
