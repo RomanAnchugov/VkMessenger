@@ -5,16 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.vk.api.sdk.auth.VKAccessToken
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.romananchugov.vkmessenger.R
 import ru.romananchugov.vkmessenger.base_classes.BaseFragment
 import ru.romananchugov.vkmessenger.chats_list.AuthState
+import ru.romananchugov.vkmessenger.utils.InternetUtils
 import ru.romananchugov.vkmessenger.utils.possibleListeners
-import timber.log.Timber
 
 
 class AuthenticationFragment : BaseFragment() {
+
+    companion object {
+        private const val TAG = "AuthenticationFragment"
+    }
+
     private val authViewModel: AuthenticationViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,16 +38,35 @@ class AuthenticationFragment : BaseFragment() {
         authViewModel.onViewCreated()
     }
 
+    private fun handleState(authState: AuthState) = when (authState) {
+        is AuthState.StartAuth -> startAuth()
+        is AuthState.AlreadyLoggedIn -> navigateToChatsListScreen()
+        is AuthState.SuccessAuth -> navigateToChatsListScreen()
+        is AuthState.ErrorAuth -> showError()
+    }
+
     private fun startAuth() {
-        possibleListeners<AuthenticationListener>().forEach {
-            it.startAuth()
+        if (InternetUtils.isInternetOn()) {
+            possibleListeners<AuthenticationListener>().forEach {
+                it.startAuth()
+            }
+        } else {
+            showError()
         }
     }
 
-    private fun handleState(authState: AuthState) = when (authState) {
-        is AuthState.ProcessAuth -> startAuth()
-        is AuthState.Success -> Timber.i("Succes state")
-        is AuthState.Error -> Timber.i("Error state")
+    private fun navigateToChatsListScreen() {
+        findNavController(this).navigate(R.id.action_authenticationFragment_to_chatsListFragment)
+    }
+
+    private fun showError() {
+        view?.let {
+            Snackbar
+                .make(it, getString(R.string.sth_went_wrong), Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(R.string.retry)) {
+                    authViewModel.onErrorSnackClicked()
+                }.show()
+        }
     }
 
     fun authSuccessFromActivity(token: VKAccessToken) {
@@ -49,6 +75,10 @@ class AuthenticationFragment : BaseFragment() {
 
     fun authFailedFromActivity(errorCode: Int) {
         authViewModel.authFailed(errorCode)
+    }
+
+    fun authInterruptedFromActivity() {
+        showError()
     }
 
 

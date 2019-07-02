@@ -8,5 +8,9 @@
               android:label="ChatsListFragment"/>
     <fragment android:id="@+id/authenticationFragment"
               android:name="ru.romananchugov.vkmessenger.authentification.AuthenticationFragment"
-              android:label="AuthenticationFragment"/>
+              android:label="AuthenticationFragment">
+        <action android:id="@+id/action_authenticationFragment_to_chatsListFragment"
+                app:destination="@id/chatsListFragment"
+                app:popUpToInclusive="true" app:launchSingleTop="true" app:popUpTo="@+id/navigation"/>
+    </fragment>
 </navigation>
