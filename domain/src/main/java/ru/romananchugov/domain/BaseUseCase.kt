@@ -1,3 +1,5 @@
 package ru.romananchugov.domain
 
-interface BaseUseCase
+abstract class BaseUseCase{
+
+}

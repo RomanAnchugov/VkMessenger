@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.auth.VKAccessToken
 import ru.romananchugov.vkmessenger.base_classes.BaseViewModel
-import ru.romananchugov.vkmessenger.chats_list.AuthState
 import timber.log.Timber
 
 
@@ -27,7 +26,7 @@ class AuthenticationViewModel : BaseViewModel() {
 
     fun onViewCreated() {
         //TEST
-        VK.logout()
+        //VK.logout()
 
         if (VK.isLoggedIn()) {
             Timber.i("User logged in")

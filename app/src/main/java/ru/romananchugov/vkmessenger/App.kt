@@ -5,6 +5,7 @@ import com.vk.api.sdk.VK
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import ru.romananchugov.vkmessenger.di.useCaseModule
 import ru.romananchugov.vkmessenger.di.viewModelsModule
 import ru.romananchugov.vkmessenger.utils.InternetUtils
 import timber.log.Timber
@@ -21,7 +22,7 @@ class App: Application(){
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(viewModelsModule)
+            modules(listOf(viewModelsModule, useCaseModule))
         }
 
         VK.initialize(this)

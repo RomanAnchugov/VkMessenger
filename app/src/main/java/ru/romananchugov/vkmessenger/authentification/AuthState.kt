@@ -1,4 +1,4 @@
-package ru.romananchugov.vkmessenger.chats_list
+package ru.romananchugov.vkmessenger.authentification
 
 import com.vk.api.sdk.auth.VKAccessToken
 
