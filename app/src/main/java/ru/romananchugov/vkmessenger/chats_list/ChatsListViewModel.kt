@@ -1,13 +1,17 @@
 package ru.romananchugov.vkmessenger.chats_list
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import ru.romananchugov.domain.chats_list.ChatsListUseCase
 import ru.romananchugov.vkmessenger.base_classes.BaseViewModel
-import timber.log.Timber
 
 class ChatsListViewModel(private val chatsListUseCase: ChatsListUseCase) : BaseViewModel() {
-     fun onTest(){
-         Timber.i("Just test ${chatsListUseCase.getChatsList()}")
+    private val _chatsList: MutableLiveData<List<ChatItem>> = MutableLiveData()
+    val chatsList: LiveData<List<ChatItem>>
+        get() = _chatsList
 
-     }
+    fun onViewCreated() {
+        _chatsList.postValue(chatsListUseCase.getChatsList().map { it.toUiData() })
+    }
 
 }
