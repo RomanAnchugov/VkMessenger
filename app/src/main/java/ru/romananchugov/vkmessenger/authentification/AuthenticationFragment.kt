@@ -9,9 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.vk.api.sdk.auth.VKAccessToken
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.romananchugov.domain.chats_list.ChatsListUseCase
 import ru.romananchugov.vkmessenger.R
 import ru.romananchugov.vkmessenger.base_classes.BaseFragment
 import ru.romananchugov.vkmessenger.utils.InternetUtils
