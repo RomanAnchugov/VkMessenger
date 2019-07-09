@@ -1,0 +1,3 @@
+package ru.romananchugov.vkmessenger.domain
+
+interface BaseRepository

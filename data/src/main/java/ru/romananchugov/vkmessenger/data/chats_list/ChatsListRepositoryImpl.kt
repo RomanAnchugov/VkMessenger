@@ -1,0 +1,5 @@
+package ru.romananchugov.vkmessenger.data.chats_list
+
+import ru.romananchugov.vkmessenger.domain.chats_list.ChatsListRepository
+
+class ChatsListRepositoryImpl:ChatsListRepository
