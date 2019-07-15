@@ -51,5 +51,5 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha02'//viewModel Scope
 
     //Vk sdk
-    implementation 'com.vk:androidsdk:2.0.0'
+    implementation "com.vk:androidsdk:$vk_version"
 }

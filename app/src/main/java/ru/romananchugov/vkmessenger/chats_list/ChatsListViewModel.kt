@@ -11,8 +11,13 @@ class ChatsListViewModel(private val chatsListUseCase: ChatsListUseCase) : BaseV
     val chatsList: LiveData<List<ChatItem>>
         get() = _chatsList
 
+    private val _isLoggedIn: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoggedIn: LiveData<Boolean>
+        get() = _isLoggedIn
+
     fun onViewCreated() {
         _chatsList.postValue(chatsListUseCase.getChatsList())
+        _isLoggedIn.postValue(chatsListUseCase.isLoggedIn())
     }
 
 }

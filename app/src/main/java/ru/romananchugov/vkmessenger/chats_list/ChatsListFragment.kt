@@ -29,5 +29,9 @@ class ChatsListFragment : BaseFragment(){
         chatsListViewModel.chatsList.observe(this, Observer {
             Timber.i("Hello from observer ${it.size}")
         })
+
+        chatsListViewModel.isLoggedIn.observe(this, Observer {
+            Timber.i("Is Logged in with Clean $it")
+        })
     }
 }

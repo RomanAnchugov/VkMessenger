@@ -4,4 +4,5 @@ import ru.romananchugov.vkmessenger.domain.BaseRepository
 
 interface ChatsListRepository: BaseRepository {
     fun getChatsList(): List<ChatItem>
+    fun isUserLoggedIn(): Boolean
 }
