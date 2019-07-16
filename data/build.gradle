@@ -46,6 +46,9 @@ dependencies {
     //Vk Sdk
     implementation "com.vk:androidsdk:$vk_version"
 
+    //Moshi
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+
 }
 repositories {
     mavenCentral()
