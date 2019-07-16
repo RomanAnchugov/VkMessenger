@@ -43,7 +43,7 @@ class MainActivity : BaseActivity(), AuthenticationListener {
     }
 
     override fun startAuth() {
-        VK.login(this, listOf(VKScope.MESSAGES, VKScope.FRIENDS))
+        VK.login(this, listOf(VKScope.FRIENDS))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

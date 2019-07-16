@@ -9,13 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.vk.api.sdk.auth.VKAccessToken
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.romananchugov.domain.chats_list.ChatsListUseCase
 import ru.romananchugov.vkmessenger.R
 import ru.romananchugov.vkmessenger.base_classes.BaseFragment
 import ru.romananchugov.vkmessenger.utils.InternetUtils
 import ru.romananchugov.vkmessenger.utils.possibleListeners
+import timber.log.Timber
 
 
 class AuthenticationFragment : BaseFragment() {
@@ -44,7 +43,7 @@ class AuthenticationFragment : BaseFragment() {
         is AuthState.StartAuth -> startAuth()
         is AuthState.AlreadyLoggedIn -> navigateToChatsListScreen()
         is AuthState.SuccessAuth -> navigateToChatsListScreen()
-        is AuthState.ErrorAuth -> showError()
+        is AuthState.ErrorAuth -> showError(authState.errorCode)
     }
 
     private fun startAuth() {
@@ -53,7 +52,7 @@ class AuthenticationFragment : BaseFragment() {
                 it.startAuth()
             }
         } else {
-            showError()
+            showError(-1)
         }
     }
 
@@ -61,7 +60,8 @@ class AuthenticationFragment : BaseFragment() {
         findNavController(this).navigate(R.id.action_authenticationFragment_to_chatsListFragment)
     }
 
-    private fun showError() {
+    private fun showError(errorCode: Int) {
+        Timber.e("Error code is $errorCode")
         view?.let {
             Snackbar
                 .make(it, getString(R.string.sth_went_wrong), Snackbar.LENGTH_INDEFINITE)
@@ -81,7 +81,7 @@ class AuthenticationFragment : BaseFragment() {
     }
 
     fun authInterruptedFromActivity() {
-        showError()
+        showError(-1)
     }
 
 
